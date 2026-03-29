@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<body>
+<h2>LeadForge</h2>
+
+<form id="f">
+<input id="name" placeholder="Name"><br>
+<input id="phone" placeholder="Phone"><br>
+<input id="city" placeholder="City"><br>
+<input id="service" placeholder="Service"><br>
+<button>Submit</button>
+</form>
+
+<pre id="o"></pre>
+
+<script>
+const API="https://YOUR-RENDER-URL/lead";
+
+f.onsubmit=async(e)=>{
+e.preventDefault();
+let r=await fetch(API,{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({
+name:name.value,
+phone:phone.value,
+city:city.value,
+service:service.value
+})
+});
+let d=await r.json();
+o.innerText=JSON.stringify(d,null,2);
+}
+</script>
+</body>
+</html>
