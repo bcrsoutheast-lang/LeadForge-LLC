@@ -1,4 +1,5 @@
 fastapi
-uvicorn
+uvicorn[standard]
 supabase
 stripe
+jinja2
