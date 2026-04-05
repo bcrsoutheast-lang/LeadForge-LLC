@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeadForge | Exclusive Homeowner Requests for Contractors</title>
+  <meta
+    name="description"
+    content="LeadForge connects homeowners with vetted local contractors. Contractors get exclusive homeowner requests and unlock full details only when they choose to."
+  />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #111111;
+      background: #ffffff;
+      line-height: 1.5;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #ececec;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 74px;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: #111111;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.16);
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 15px;
+      color: #444444;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a:hover {
+      color: #111111;
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #111111;
+      color: #ffffff !important;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    .nav-cta:hover,
+    .hero-primary:hover,
+    .hero-secondary:hover,
+    .final-primary:hover,
+    .final-secondary:hover {
+      transform: translateY(-1px);
+      opacity: 0.96;
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at top left, rgba(0, 0, 0, 0.06), transparent 34%),
+        linear-gradient(180deg, #f8f8f8 0%, #ffffff 62%);
+      padding: 72px 0 56px;
+      border-bottom: 1px solid #f1f1f1;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #f2f2f2;
+      color: #222222;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      margin: 0 0 18px;
+      font-size: 56px;
+      line-height: 1.03;
+      letter-spacing: -0.04em;
+      max-width: 700px;
+    }
+
+    .hero p {
+      margin: 0 0 26px;
+      font-size: 19px;
+      color: #4b4b4b;
+      max-width: 680px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .hero-primary,
+    .hero-secondary,
+    .final-primary,
+    .final-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 14px;
+      font-weight: 700;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    .hero-primary,
+    .final-primary {
+      background: #111111;
+      color: #ffffff;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.15);
+    }
+
+    .hero-secondary,
+    .final-secondary {
+      background: #ffffff;
+      color: #111111;
+      border: 1px solid #dddddd;
+    }
+
+    .hero-points {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .hero-point {
+      background: #ffffff;
+      border: 1px solid #ebebeb;
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+    }
+
+    .hero-point strong {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    .hero-point span {
+      color: #555555;
+      font-size: 14px;
+    }
+
+    .hero-card {
+      background: #111111;
+      color: #ffffff;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .hero-card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #d9d9d9;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .hero-badge {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .lead-card {
+      background: #1b1b1b;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .lead-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .lead-card small {
+      display: inline-block;
+      color: #cccccc;
+      margin-bottom: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .lead-card h3 {
+      margin: 0 0 8px;
+      font-size: 21px;
+      letter-spacing: -0.02em;
+    }
+
+    .lead-card p {
+      margin: 0 0 16px;
+      color: #d2d2d2;
+      font-size: 15px;
+    }
+
+    .lead-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .lead-meta span {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 13px;
+      color: #f1f1f1;
+    }
+
+    .section {
+      padding: 78px 0;
+    }
+
+    .section-light {
+      background: #fafafa;
+      border-top: 1px solid #f0f0f0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 34px;
+    }
+
+    .section-head h2 {
+      margin: 0 0 12px;
+      font-size: 40px;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+    }
+
+    .section-head p {
+      margin: 0;
+      font-size: 18px;
+      color: #555555;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .step {
+      background: #ffffff;
+      border: 1px solid #ececec;
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    }
+
+    .step-number {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: #111111;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    .step h3 {
+      margin: 0 0 10px;
+      font-size: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .step p {
+      margin: 0;
+      color: #555555;
+      font-size: 16px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .feature {
+      border: 1px solid #ececec;
+      border-radius: 20px;
+      padding: 24px;
+      background: #ffffff;
+    }
+
+    .feature h3 {
+      margin: 0 0 10px;
+      font-size: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .feature p {
+      margin: 0;
+      color: #555555;
+      font-size: 16px;
+    }
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .audience-card {
+      background: #ffffff;
+      border: 1px solid #ececec;
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    }
+
+    .audience-card h3 {
+      margin: 0 0 12px;
+      font-size: 28px;
+      letter-spacing: -0.03em;
+    }
+
+    .audience-card p {
+      margin: 0 0 18px;
+      color: #555555;
+      font-size: 16px;
+    }
+
+    .audience-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 22px;
+    }
+
+    .audience-list li {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 12px;
+      color: #333333;
+    }
+
+    .audience-list li::before {
+      content: "•";
+      position: absolute;
+      left: 8px;
+      top: 0;
+      color: #111111;
+      font-weight: 800;
+    }
+
+    .audience-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 12px;
+      background: #111111;
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .quote-box {
+      background: #111111;
+      color: #ffffff;
+      border-radius: 24px;
+      padding: 34px;
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.16);
+    }
+
+    .quote-box p {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.25;
+      letter-spacing: -0.03em;
+    }
+
+    .quote-box span {
+      display: block;
+      margin-top: 16px;
+      color: #d1d1d1;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .final-cta {
+      padding: 88px 0;
+      background:
+        radial-gradient(circle at top right, rgba(0, 0, 0, 0.06), transparent 28%),
+        #fafafa;
+      border-top: 1px solid #efefef;
+    }
+
+    .final-wrap {
+      background: #ffffff;
+      border: 1px solid #ededed;
+      border-radius: 28px;
+      padding: 42px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
+      text-align: center;
+    }
+
+    .final-wrap h2 {
+      margin: 0 0 12px;
+      font-size: 42px;
+      letter-spacing: -0.03em;
+    }
+
+    .final-wrap p {
+      max-width: 740px;
+      margin: 0 auto 24px;
+      color: #555555;
+      font-size: 18px;
+    }
+
+    .final-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .footer {
+      padding: 28px 0 48px;
+      background: #fafafa;
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      border-top: 1px solid #ececec;
+      padding-top: 24px;
+      color: #666666;
+      font-size: 14px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a:hover {
+      color: #111111;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .steps,
+      .features,
+      .audience-grid,
+      .hero-points {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .section-head h2,
+      .final-wrap h2 {
+        font-size: 34px;
+      }
+
+      .quote-box p {
+        font-size: 24px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 14px 0;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 12px;
+      }
+
+      .hero {
+        padding-top: 54px;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .hero p,
+      .section-head p,
+      .final-wrap p {
+        font-size: 17px;
+      }
+
+      .section {
+        padding: 62px 0;
+      }
+
+      .final-wrap {
+        padding: 28px;
+      }
+
+      .quote-box {
+        padding: 26px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="/" class="brand">
+        <div class="brand-mark">LF</div>
+        <div>LeadForge</div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#how-it-works">How It Works</a>
+        <a href="#for-homeowners">For Homeowners</a>
+        <a href="#for-contractors">For Contractors</a>
+        <a href="/contractor-signup" class="nav-cta">Join as a Contractor</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">Exclusive homeowner requests. Real local opportunities.</div>
+        <h1>Homeowners choose the contractor. Contractors unlock the opportunity.</h1>
+        <p>
+          LeadForge helps homeowners browse vetted contractor profiles and choose who they want
+          to hear from. Contractors get exclusive requests and unlock full lead details only when
+          they choose to move forward.
+        </p>
+
+        <div class="hero-actions">
+          <a
+            href="https://lead-forge-frontend-git-main-bcrsoutheast-langs-projects.vercel.app/homeowner2.html"
+            class="hero-primary"
+          >
+            Find a Contractor
+          </a>
+          <a href="/contractor-signup" class="hero-secondary">
+            Join LeadForge
+          </a>
+        </div>
+
+        <div class="hero-points">
+          <div class="hero-point">
+            <strong>Exclusive Requests</strong>
+            <span>One homeowner request goes to one chosen contractor.</span>
+          </div>
+          <div class="hero-point">
+            <strong>Vetted Local Pros</strong>
+            <span>Homeowners browse real contractor profiles before submitting.</span>
+          </div>
+          <div class="hero-point">
+            <strong>Pay to Unlock</strong>
+            <span>Contractors only pay when they want access to the opportunity.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-card-top">
+          <div class="hero-card-title">How LeadForge feels</div>
+          <div class="hero-badge">Built for local service pros</div>
+        </div>
+
+        <div class="lead-card">
+          <small>Example Opportunity</small>
+          <h3>Roof replacement request</h3>
+          <p>
+            Homeowner in Birmingham needs estimates for a full roof replacement and chose your company.
+          </p>
+          <div class="lead-meta">
+            <span>Roofing</span>
+            <span>Birmingham, AL</span>
+            <span>Exclusive Request</span>
+          </div>
+        </div>
+
+        <div class="lead-card">
+          <small>Unlock Flow</small>
+          <h3>Simple $10 access fee</h3>
+          <p>
+            Review the opportunity first, then unlock the homeowner’s full details when you are ready.
+          </p>
+          <div class="lead-meta">
+            <span>No monthly lock-in</span>
+            <span>One-time unlock</span>
+            <span>Fast decision</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how-it-works" class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>How LeadForge works</h2>
+        <p>
+          This is not a generic lead dump. Homeowners browse contractor options, choose who they want,
+          and submit one exclusive request.
+        </p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Homeowners browse</h3>
+          <p>
+            A homeowner reviews contractor options and selects the business they want for their project.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>One request is submitted</h3>
+          <p>
+            The homeowner sends a single request tied to the contractor they chose, creating a cleaner,
+            more direct opportunity.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Contractor unlocks the lead</h3>
+          <p>
+            The contractor reviews the request and pays a one-time fee only if they want full access
+            to the homeowner’s details.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container">
+      <div class="section-head">
+        <h2>Why it feels better than the usual lead game</h2>
+        <p>
+          LeadForge is built to make the opportunity feel more direct, more exclusive, and more aligned
+          with real intent.
+        </p>
+      </div>
+
+      <div class="features">
+        <div class="feature">
+          <h3>Chosen, not blasted</h3>
+          <p>
+            The homeowner selects the contractor they want instead of spraying the same request everywhere.
+          </p>
+        </div>
+
+        <div class="feature">
+          <h3>Clear unlock decision</h3>
+          <p>
+            Contractors can preview the opportunity before deciding whether to unlock the full details.
+          </p>
+        </div>
+
+        <div class="feature">
+          <h3>Cleaner homeowner experience</h3>
+          <p>
+            Homeowners feel more in control because they choose who gets their request.
+          </p>
+        </div>
+
+        <div class="feature">
+          <h3>Built for local services</h3>
+          <p>
+            Roofing, HVAC, plumbing, landscaping, and other home service contractors fit naturally here.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="for-homeowners" class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>For homeowners</h2>
+        <p>
+          Browse contractor options, choose who you want, and send one direct request without turning
+          your project into a free-for-all.
+        </p>
+      </div>
+
+      <div class="audience-grid">
+        <div class="audience-card">
+          <h3>Pick the contractor you want</h3>
+          <p>
+            Review the contractor that fits your project and submit your request directly.
+          </p>
+          <ul class="audience-list">
+            <li>Choose the service professional you prefer</li>
+            <li>Submit one focused project request</li>
+            <li>Get a cleaner experience than broad lead marketplaces</li>
+          </ul>
+          <a
+            href="https://lead-forge-frontend-git-main-bcrsoutheast-langs-projects.vercel.app/homeowner2.html"
+            class="audience-action"
+          >
+            Start Your Request
+          </a>
+        </div>
+
+        <div class="audience-card">
+          <h3>Stay in control of the process</h3>
+          <p>
+            Your request is centered around your chosen contractor, which keeps things simpler and more intentional.
+          </p>
+          <ul class="audience-list">
+            <li>More direct path to the contractor you want</li>
+            <li>Better fit for serious projects</li>
+            <li>Designed to feel more personal and less chaotic</li>
+          </ul>
+          <a
+            href="https://lead-forge-frontend-git-main-bcrsoutheast-langs-projects.vercel.app/homeowner2.html"
+            class="audience-action"
+          >
+            Find a Contractor
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="for-contractors" class="section section-light">
+    <div class="container">
+      <div class="section-head">
+        <h2>For contractors</h2>
+        <p>
+          Join LeadForge, get access to exclusive homeowner requests, and unlock the opportunities
+          you actually want.
+        </p>
+      </div>
+
+      <div class="audience-grid">
+        <div class="audience-card">
+          <h3>Join free</h3>
+          <p>
+            Apply to be part of the network and position your business for direct homeowner opportunities.
+          </p>
+          <ul class="audience-list">
+            <li>Simple contractor application</li>
+            <li>Built for local service businesses</li>
+            <li>No need to pay up front just to get started</li>
+          </ul>
+          <a href="/contractor-signup" class="audience-action">Join as a Contractor</a>
+        </div>
+
+        <div class="audience-card">
+          <h3>Unlock only when you want</h3>
+          <p>
+            Review the lead, then decide if the opportunity is worth unlocking for your business.
+          </p>
+          <ul class="audience-list">
+            <li>One-time access fee</li>
+            <li>Clearer buying decision</li>
+            <li>Opportunity-first model instead of broad lead spam</li>
+          </ul>
+          <a href="/contractor-signup" class="audience-action">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="quote-box">
+        <p>
+          “LeadForge is built around one simple idea: give homeowners a better way to choose,
+          and give contractors a cleaner opportunity to win.”
+        </p>
+        <span>LeadForge</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <div class="container">
+      <div class="final-wrap">
+        <h2>Ready to use the working version?</h2>
+        <p>
+          Homeowners can start a request now. Contractors can join now. The core business flow is live.
+        </p>
+
+        <div class="final-actions">
+          <a
+            href="https://lead-forge-frontend-git-main-bcrsoutheast-langs-projects.vercel.app/homeowner2.html"
+            class="final-primary"
+          >
+            Homeowners: Start Here
+          </a>
+          <a href="/contractor-signup" class="final-secondary">
+            Contractors: Apply Here
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-row">
+        <div>© LeadForge. Exclusive homeowner requests for local contractors.</div>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/contractor-signup">Contractor Signup</a>
+          <a href="https://lead-forge-frontend-git-main-bcrsoutheast-langs-projects.vercel.app/homeowner2.html">Homeowner Request</a>
+          <a href="/health">Health</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
