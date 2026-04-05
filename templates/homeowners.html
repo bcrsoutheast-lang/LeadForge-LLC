@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find a Contractor | LeadForge</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            color: #111;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .brand {
+            font-size: 28px;
+            font-weight: 700;
+            text-decoration: none;
+            color: #111;
+        }
+
+        nav a {
+            margin-left: 24px;
+            text-decoration: none;
+            color: #111;
+            font-weight: 600;
+        }
+
+        .hero {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 60px 20px 30px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            margin: 0 0 16px;
+            font-size: 46px;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            margin: 0 auto;
+            max-width: 620px;
+            font-size: 20px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .form-wrap {
+            max-width: 760px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #e5e5e5;
+            border-radius: 18px;
+            padding: 28px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+        }
+
+        .card h2 {
+            margin: 0 0 10px;
+            font-size: 28px;
+        }
+
+        .card .subtext {
+            margin: 0 0 24px;
+            color: #666;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #d8d8d8;
+            border-radius: 12px;
+            font-size: 16px;
+            background: #fff;
+        }
+
+        textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        button {
+            margin-top: 22px;
+            width: 100%;
+            border: none;
+            background: #111;
+            color: #fff;
+            padding: 16px 20px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .status {
+            margin-top: 18px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #111;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        @media (max-width: 700px) {
+            header {
+                padding: 18px 20px;
+            }
+
+            .brand {
+                font-size: 24px;
+            }
+
+            nav a {
+                margin-left: 14px;
+                font-size: 14px;
+            }
+
+            .hero {
+                padding: 40px 20px 24px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" class="brand">LeadForge</a>
+        <nav>
+            <a href="/contractor-signup">Contractors</a>
+            <a href="/admin">Admin</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Tell us about your project.</h1>
+        <p>
+            Browse vetted contractors and submit one exclusive request.
+            Your project goes directly to the contractor you choose.
+        </p>
+    </section>
+
+    <section class="form-wrap">
+        <div class="card">
+            <h2>Homeowner Request</h2>
+            <p class="subtext">
+                Fill this out and we will send your request to the contractor you select.
+            </p>
+
+            <form id="leadForm">
+                <div class="grid">
+                    <div class="field">
+                        <label for="homeowner_name">Full Name</label>
+                        <input type="text" id="homeowner_name" name="homeowner_name" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="service">Service Needed</label>
+                        <input type="text" id="service" name="service" placeholder="Roofing, HVAC, Plumbing..." required>
+                    </div>
+
+                    <div class="field">
+                        <label for="contractor_id">Choose Contractor</label>
+                        <select id="contractor_id" name="contractor_id" required>
+                            <option value="">Loading contractors...</option>
+                        </select>
+                    </div>
+
+                    <div class="field full">
+                        <label for="project_details">Project Details</label>
+                        <textarea id="project_details" name="project_details" placeholder="Describe what you need done..." required></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" id="submitBtn">Submit Request</button>
+                <div id="status" class="status"></div>
+            </form>
+
+            <a href="/" class="back-link">← Back to home</a>
+        </div>
+    </section>
+
+    <script>
+        const contractorSelect = document.getElementById("contractor_id");
+        const leadForm = document.getElementById("leadForm");
+        const statusEl = document.getElementById("status");
+        const submitBtn = document.getElementById("submitBtn");
+
+        async function loadContractors() {
+            try {
+                const response = await fetch("/contractors");
+                const contractors = await response.json();
+
+                contractorSelect.innerHTML = '<option value="">Select a contractor</option>';
+
+                if (!Array.isArray(contractors) || contractors.length === 0) {
+                    contractorSelect.innerHTML = '<option value="">No contractors available yet</option>';
+                    return;
+                }
+
+                contractors.forEach(contractor => {
+                    const option = document.createElement("option");
+                    option.value = contractor.id;
+                    option.textContent = `${contractor.company_name} - ${contractor.service_type || "Contractor"}`;
+                    contractorSelect.appendChild(option);
+                });
+            } catch (error) {
+                contractorSelect.innerHTML = '<option value="">Could not load contractors</option>';
+            }
+        }
+
+        leadForm.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            statusEl.textContent = "";
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Submitting...";
+
+            const payload = {
+                homeowner_name: document.getElementById("homeowner_name").value.trim(),
+                phone: document.getElementById("phone").value.trim(),
+                service: document.getElementById("service").value.trim(),
+                project_details: document.getElementById("project_details").value.trim(),
+                contractor_id: document.getElementById("contractor_id").value
+            };
+
+            try {
+                const response = await fetch("/leads", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error("Submit failed");
+                }
+
+                statusEl.textContent = "Request submitted successfully.";
+                leadForm.reset();
+                await loadContractors();
+            } catch (error) {
+                statusEl.textContent = "There was a problem submitting your request.";
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Submit Request";
+            }
+        });
+
+        loadContractors();
+    </script>
+</body>
+</html>
