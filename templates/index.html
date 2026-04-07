@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeadForge</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f7f7f7;
+  color: #111;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* HEADER */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.logo {
+  height: 80px; /* BIGGER LOGO */
+}
+
+/* BUTTONS */
+.btn {
+  background: #111;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.btn-gold {
+  background: #cfa43b;
+  color: #111;
+}
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, #111 0%, #1f1f1f 100%);
+  color: white;
+  padding: 70px 30px;
+  border-radius: 16px;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.hero h1 {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 18px;
+  color: #d1d1d1;
+  max-width: 700px;
+  margin: auto;
+}
+
+/* SECTION */
+.section {
+  margin-bottom: 50px;
+}
+
+.section h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+/* CARDS */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+/* HIGHLIGHT BOX */
+.highlight {
+  background: #111;
+  color: white;
+  padding: 40px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.highlight p {
+  color: #ccc;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  margin-top: 40px;
+  color: #777;
+  font-size: 14px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<!-- HEADER -->
+<header>
+  <img src="/static/logo.png" class="logo">
+  <a href="/join-contractor" class="btn">Join as Contractor</a>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Exclusive Homeowner Requests. No Competition.</h1>
+  <p>
+    Homeowners choose the contractor they want — not multiple bids.  
+    Get direct access to real opportunities in your service area.
+  </p>
+  <br>
+  <a href="/contractors" class="btn btn-gold">Find a Contractor</a>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="section">
+  <h2>How It Works</h2>
+  <div class="cards">
+    
+    <div class="card">
+      <h3>1. Homeowners Choose</h3>
+      <p>Homeowners browse contractors and select who they want — no bidding wars.</p>
+    </div>
+
+    <div class="card">
+      <h3>2. You Receive Requests</h3>
+      <p>Get notified when a homeowner selects your business.</p>
+    </div>
+
+    <div class="card">
+      <h3>3. Unlock Opportunity</h3>
+      <p>Unlock full homeowner details only when you’re ready.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- CONTRACTOR OFFER -->
+<div class="highlight">
+  <h2>Start with Your First 10 Opportunities</h2>
+  <p>
+    Start with your first 10 exclusive homeowner opportunities — just $10 to unlock each as requests come in.
+  </p>
+  <br>
+
+  <p>
+    ✔ Homeowners choose YOU — not multiple contractors<br>
+    ✔ No shared leads or bidding wars<br>
+    ✔ Only pay when you decide to unlock
+  </p>
+
+  <br>
+
+  <a href="/join-contractor" class="btn btn-gold">
+    Access My First 10 Opportunities
+  </a>
+
+  <p style="margin-top:15px; font-size:13px;">
+    *Opportunities are based on real homeowner demand in your service area.
+  </p>
+</div>
+
+<!-- CTA -->
+<div class="section" style="text-align:center;">
+  <h2>Looking for a Contractor?</h2>
+  <p>Browse trusted contractors and choose the right one for your project.</p>
+  <br>
+  <a href="/contractors" class="btn">Browse Contractors</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  © LeadForge — Exclusive Homeowner Opportunities
+</footer>
+
+</div>
+
+</body>
+</html>
