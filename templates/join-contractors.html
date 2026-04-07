@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join as a Contractor | LeadForge</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0b0b0b;
+      color: #f5f5f5;
+      line-height: 1.5;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: #111111;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding: 14px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: #ffffff;
+    }
+
+    .brand img {
+      height: 48px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      color: #e8e8e8;
+      font-size: 0.95rem;
+      padding: 10px 14px;
+      border-radius: 10px;
+      transition: 0.2s ease;
+    }
+
+    .nav-link:hover {
+      background: rgba(255,255,255,0.08);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: 0.2s ease;
+      text-align: center;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #d4af37, #b8860b);
+      color: #111111;
+      box-shadow: 0 8px 24px rgba(212,175,55,0.22);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 28px rgba(212,175,55,0.28);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.08);
+    }
+
+    .hero {
+      padding: 64px 0 28px;
+      background:
+        radial-gradient(circle at top left, rgba(212,175,55,0.16), transparent 34%),
+        radial-gradient(circle at top right, rgba(220,38,38,0.14), transparent 28%),
+        linear-gradient(180deg, #111111 0%, #0b0b0b 100%);
+    }
+
+    .hero-inner {
+      max-width: 840px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(212,175,55,0.14);
+      color: #f3d37a;
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2.1rem, 4.5vw, 3.6rem);
+      line-height: 1.06;
+      color: #ffffff;
+    }
+
+    .hero p {
+      margin: 0;
+      color: #d3d3d3;
+      font-size: 1.04rem;
+      max-width: 760px;
+    }
+
+    .content {
+      padding: 28px 0 80px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .card {
+      background: linear-gradient(180deg, #171717 0%, #111111 100%);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 14px 34px rgba(0,0,0,0.22);
+    }
+
+    .card h2 {
+      margin: 0 0 10px;
+      color: #ffffff;
+      font-size: 1.55rem;
+    }
+
+    .card p.lead {
+      margin: 0 0 24px;
+      color: #c9c9c9;
+      font-size: 0.98rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #f2f2f2;
+    }
+
+    .hint {
+      font-size: 0.84rem;
+      color: #aaaaaa;
+      font-weight: 400;
+      margin-top: -4px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="url"],
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: #0d0d0d;
+      color: #ffffff;
+      border-radius: 14px;
+      padding: 14px 14px;
+      font-size: 0.98rem;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="tel"]:focus,
+    input[type="url"]:focus,
+    textarea:focus,
+    select:focus {
+      border-color: rgba(212,175,55,0.55);
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.12);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .service-box {
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 18px;
+      padding: 18px;
+      background: #0e0e0e;
+    }
+
+    .service-box-title {
+      margin: 0 0 8px;
+      color: #ffffff;
+      font-size: 1.02rem;
+      font-weight: 800;
+    }
+
+    .service-box-copy {
+      margin: 0 0 16px;
+      color: #bbbbbb;
+      font-size: 0.92rem;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .service-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: #121212;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 12px 12px;
+      transition: 0.2s ease;
+    }
+
+    .service-option:hover {
+      border-color: rgba(212,175,55,0.35);
+      background: #151515;
+    }
+
+    .service-option input {
+      margin-top: 3px;
+      transform: scale(1.1);
+      accent-color: #d4af37;
+      flex-shrink: 0;
+    }
+
+    .service-option span {
+      color: #efefef;
+      font-size: 0.95rem;
+      line-height: 1.35;
+    }
+
+    .check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-top: 6px;
+      background: #0d0d0d;
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .check-row input[type="checkbox"] {
+      margin-top: 3px;
+      transform: scale(1.1);
+      accent-color: #d4af37;
+      flex-shrink: 0;
+    }
+
+    .check-row label {
+      margin: 0;
+      font-weight: 600;
+      color: #e8e8e8;
+      font-size: 0.94rem;
+      line-height: 1.45;
+    }
+
+    .submit-wrap {
+      margin-top: 22px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .submit-wrap .btn {
+      min-width: 180px;
+    }
+
+    .side-card h3 {
+      margin: 0 0 12px;
+      font-size: 1.28rem;
+      color: #ffffff;
+    }
+
+    .side-card p {
+      margin: 0 0 18px;
+      color: #cdcdcd;
+      font-size: 0.96rem;
+    }
+
+    .benefit-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .benefit {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 14px;
+      border-radius: 16px;
+      background: #101010;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .benefit-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(212,175,55,0.12);
+      border: 1px solid rgba(212,175,55,0.18);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .benefit strong {
+      display: block;
+      color: #ffffff;
+      margin-bottom: 4px;
+      font-size: 0.96rem;
+    }
+
+    .benefit div:last-child {
+      color: #c9c9c9;
+      font-size: 0.92rem;
+    }
+
+    .service-preview {
+      margin-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 22px;
+    }
+
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(212,175,55,0.10);
+      border: 1px solid rgba(212,175,55,0.18);
+      color: #f0d27a;
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background: #0f0f0f;
+      padding: 22px 0;
+      color: #9f9f9f;
+      font-size: 0.92rem;
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        justify-content: center;
+      }
+
+      .brand {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .card {
+        padding: 22px 18px;
+      }
+
+      .hero {
+        padding: 54px 0 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="/" class="brand">
+        <img src="/static/IMG_2026.png" alt="LeadForge Logo" />
+        <span>LeadForge</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/services" class="nav-link">Services</a>
+        <a href="/contractors" class="nav-link">Browse Contractors</a>
+        <a href="/admin-login" class="nav-link">Admin</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="eyebrow">Contractor Application</div>
+        <h1>Join LeadForge and Get Access to Exclusive Homeowner Requests</h1>
+        <p>
+          Apply to join LeadForge and tell us which services you provide. You can select
+          more than one service so homeowners can find you in every category you actually work in.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container">
+      <div class="grid">
+        <div class="card">
+          <h2>Apply as a Contractor</h2>
+          <p class="lead">
+            Complete the application below. Once approved, your business can appear in one
+            or more service categories based on the services you select.
+          </p>
+
+          <form method="POST" action="/join-contractor">
+            <div class="form-grid">
+              <div class="field">
+                <label for="company_name">Company Name</label>
+                <input type="text" id="company_name" name="company_name" placeholder="Your business name" required />
+              </div>
+
+              <div class="field">
+                <label for="contact_name">Contact Name</label>
+                <input type="text" id="contact_name" name="contact_name" placeholder="Your full name" required />
+              </div>
+
+              <div class="field">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="Best number for leads" required />
+              </div>
+
+              <div class="field">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="you@example.com" required />
+              </div>
+
+              <div class="field">
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" placeholder="City you serve" required />
+              </div>
+
+              <div class="field">
+                <label for="state">State</label>
+                <input type="text" id="state" name="state" placeholder="State" required />
+              </div>
+
+              <div class="field full">
+                <label for="service_area">Service Area</label>
+                <div class="hint">Example: Birmingham and surrounding areas</div>
+                <input type="text" id="service_area" name="service_area" placeholder="List the main areas you serve" required />
+              </div>
+
+              <div class="field full">
+                <label for="website">Website or Social Page</label>
+                <input type="url" id="website" name="website" placeholder="https://yourwebsite.com" />
+              </div>
+
+              <div class="field full">
+                <label for="bio">Business Description</label>
+                <div class="hint">Tell homeowners what you do, what makes you different, and the kind of projects you want.</div>
+                <textarea id="bio" name="bio" placeholder="Short description of your business and services" required></textarea>
+              </div>
+
+              <div class="field full">
+                <div class="service-box">
+                  <div class="service-box-title">What services do you provide?</div>
+                  <p class="service-box-copy">
+                    Select all that apply. Contractors can appear in multiple service categories after approval.
+                  </p>
+
+                  <div class="service-grid">
+                    <label class="service-option">
+                      <input type="checkbox" name="services" value="roofing" />
+                      <span>Roofing</span>
+                    </label>
+
+                    <label class="service-option">
+                      <input type="checkbox" name="services" value="hvac" />
+                      <span>HVAC</span>
+                    </label>
+
+                    <label class="service-option">
+                      <input type="checkbox" name="services" value="plumbing" />
+                      <span>Plumbing</span>
+                    </label>
+
+                    <label class="service-option">
+                      <input type="checkbox" name="services" value="electrical" />
+                      <span>Electrical</span>
+                    </label>
+
+                    <label class="service-option">
+                      <input type="checkbox" name="services" value="remodeling" />
+                      <span>Remodeling</span>
+                    </label>
+
+                    <label class="service-option">
+                      <input type="checkbox" name="services" value="fencing" />
+                      <span>Fencing &amp; Fence Installation</span>
+                    </label>
+
+                    <label class="service-option">
+                      <input type="checkbox" name="services" value="soft-washing" />
+                      <span>Exterior Cleaning / Soft Washing</span>
+                    </label>
+
+                    <label class="service-option">
+                      <input type="checkbox" name="services" value="landscaping" />
+                      <span>Landscaping</span>
+                    </label>
+
+                    <label class="service-option">
+                      <input type="checkbox" name="services" value="handyman" />
+                      <span>Handyman</span>
+                    </label>
+
+                    <label class="service-option">
+                      <input type="checkbox" name="services" value="junk-removal" />
+                      <span>Junk Removal</span>
+                    </label>
+
+                    <label class="service-option">
+                      <input type="checkbox" name="services" value="pest-control" />
+                      <span>Pest Control</span>
+                    </label>
+
+                    <label class="service-option">
+                      <input type="checkbox" name="services" value="cleaning" />
+                      <span>Cleaning</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="field full">
+                <div class="check-row">
+                  <input type="checkbox" id="disclaimer" name="disclaimer" required />
+                  <label for="disclaimer">
+                    I understand that submitting this application does not guarantee approval.
+                    If approved, LeadForge may display my business in the service categories I selected,
+                    and homeowner requests are exclusive to the contractor chosen by the homeowner.
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="submit-wrap">
+              <button type="submit" class="btn btn-primary">Submit Application</button>
+              <a href="/services" class="btn btn-secondary">Browse Services</a>
+            </div>
+          </form>
+        </div>
+
+        <div class="card side-card">
+          <h3>Why Join LeadForge?</h3>
+          <p>
+            LeadForge is built around direct homeowner intent. Instead of blasting your info everywhere,
+            homeowners choose one contractor and send one exclusive request.
+          </p>
+
+          <div class="benefit-list">
+            <div class="benefit">
+              <div class="benefit-icon">🎯</div>
+              <div>
+                <strong>Exclusive Requests</strong>
+                Homeowners choose a contractor directly instead of submitting to a crowded shared lead form.
+              </div>
+            </div>
+
+            <div class="benefit">
+              <div class="benefit-icon">🔓</div>
+              <div>
+                <strong>Simple Unlock Model</strong>
+                Approved contractors can unlock direct homeowner requests when opportunities come in.
+              </div>
+            </div>
+
+            <div class="benefit">
+              <div class="benefit-icon">📍</div>
+              <div>
+                <strong>Visible in Multiple Categories</strong>
+                If you offer more than one service, your business can appear in each matching service section.
+              </div>
+            </div>
+          </div>
+
+          <div class="service-preview">
+            <h3>Current Service Categories</h3>
+            <p>
+              Homeowners can browse contractors by service, so choosing the right categories matters.
+            </p>
+
+            <div class="service-tags">
+              <span class="tag">Roofing</span>
+              <span class="tag">HVAC</span>
+              <span class="tag">Plumbing</span>
+              <span class="tag">Electrical</span>
+              <span class="tag">Remodeling</span>
+              <span class="tag">Fencing</span>
+              <span class="tag">Soft Washing</span>
+              <span class="tag">Landscaping</span>
+              <span class="tag">Handyman</span>
+              <span class="tag">Junk Removal</span>
+              <span class="tag">Pest Control</span>
+              <span class="tag">Cleaning</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      LeadForge connects homeowners with vetted contractors through exclusive direct requests.
+    </div>
+  </footer>
+</body>
+</html>
