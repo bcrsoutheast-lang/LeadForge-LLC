@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Request Contractor</title>
+</head>
+<body style="background:#111;color:white;font-family:Arial;padding:40px">
+
+<h1>Request Contractor</h1>
+
+<p>Contractor ID: {{ contractor_id }}</p>
+
+<form method="POST" action="/request/{{ contractor_id }}">
+
+<label>Full Name</label><br>
+<input type="text" name="owner_name" required><br><br>
+
+<label>Phone</label><br>
+<input type="text" name="phone" required><br><br>
+
+<label>Email</label><br>
+<input type="email" name="email" required><br><br>
+
+<label>Service Needed</label><br>
+<input type="text" name="service" required><br><br>
+
+<label>City</label><br>
+<input type="text" name="city" required><br><br>
+
+<label>State</label><br>
+<input type="text" name="state" required><br><br>
+
+<label>ZIP CODE</label><br>
+<input type="text" name="zip" required><br><br>
+
+<label>Project Details</label><br>
+<textarea name="project_details" required></textarea><br><br>
+
+<button type="submit">Submit Request</button>
+
+</form>
+
+</body>
+</html>
