@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contractor Dashboard</title>
+</head>
+<body>
+    <h1>Contractor Dashboard</h1>
+
+    {% if contractor %}
+        <h2>{{ contractor.name }}</h2>
+        <p>{{ contractor.company_name }}</p>
+    {% endif %}
+
+    <h3>Leads</h3>
+
+    {% if leads %}
+        {% for lead in leads %}
+            <div style="margin-bottom:20px;">
+                <p><strong>Name:</strong> {{ lead.owner_name }}</p>
+                <p><strong>Phone:</strong> {{ lead.phone }}</p>
+                <p><strong>Email:</strong> {{ lead.email }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No leads yet</p>
+    {% endif %}
+</body>
+</html>
