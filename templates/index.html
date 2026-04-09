@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VaultForge | Homeowners Choose. Contractors Unlock Opportunity.</title>
+  <style>
+    :root {
+      --bg: #050505;
+      --bg-soft: #0d0d0d;
+      --panel: #111111;
+      --panel-2: #171717;
+      --text: #f5f5f5;
+      --muted: #b8b8b8;
+      --red: #b30000;
+      --red-bright: #e10600;
+      --gold: #d4a017;
+      --gold-bright: #f1c75b;
+      --silver: #cfcfcf;
+      --silver-dark: #8d8d8d;
+      --border: rgba(255,255,255,0.08);
+      --shadow-red: 0 0 30px rgba(225, 6, 0, 0.22);
+      --shadow-gold: 0 0 24px rgba(212, 160, 23, 0.18);
+      --radius: 18px;
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(179, 0, 0, 0.18), transparent 30%),
+        linear-gradient(180deg, #080808 0%, #040404 100%);
+      color: var(--text);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(5, 5, 5, 0.88);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .topbar-inner {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      width: 92px;
+      max-height: 92px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 18px rgba(225, 6, 0, 0.22));
+      flex-shrink: 0;
+    }
+
+    .brand-copy {
+      min-width: 0;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 34px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, var(--gold-bright), #ffffff 45%, #d9d9d9 65%, var(--silver-dark) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-tagline {
+      margin: 7px 0 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      letter-spacing: 0.3px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-link {
+      color: #ededed;
+      font-size: 14px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      transition: 0.2s ease;
+    }
+
+    .nav-link:hover {
+      background: rgba(255,255,255,0.06);
+      color: #ffffff;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--red-bright), #7d0000);
+      color: #fff;
+      box-shadow: var(--shadow-red);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, #1c1c1c, #0d0d0d);
+      color: #fff;
+      border-color: rgba(255,255,255,0.14);
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, #f1c75b, #b88400);
+      color: #120d00;
+      box-shadow: var(--shadow-gold);
+    }
+
+    .hero {
+      position: relative;
+      padding: 64px 0 42px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(225, 6, 0, 0.18), transparent 24%),
+        radial-gradient(circle at 88% 12%, rgba(212, 160, 23, 0.10), transparent 22%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 8px 14px;
+      border: 1px solid rgba(212,160,23,0.25);
+      border-radius: 999px;
+      color: var(--gold-bright);
+      background: rgba(212,160,23,0.07);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.9px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      margin: 0 0 14px 0;
+      font-size: 56px;
+      line-height: 1.02;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    .hero .subheadline {
+      margin: 0 0 18px 0;
+      font-size: 22px;
+      line-height: 1.35;
+      color: #f2f2f2;
+      max-width: 760px;
+    }
+
+    .hero .support {
+      margin: 0 0 28px 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.65;
+      max-width: 760px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .hero-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .hero-point {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #f0f0f0;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .hero-card {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015)),
+        linear-gradient(180deg, #151515 0%, #0b0b0b 100%);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 28px;
+      padding: 24px;
+      box-shadow: 0 18px 70px rgba(0,0,0,0.45), var(--shadow-red);
+    }
+
+    .hero-card-frame {
+      border-radius: 20px;
+      border: 1px solid rgba(212,160,23,0.18);
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015));
+      padding: 18px;
+    }
+
+    .hero-card-logo {
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .hero-card-caption {
+      margin-top: 16px;
+      text-align: center;
+      color: #d8d8d8;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .section {
+      padding: 34px 0;
+    }
+
+    .section-heading {
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto 26px;
+    }
+
+    .section-heading h2 {
+      margin: 0 0 12px;
+      font-size: 36px;
+      line-height: 1.1;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .cards-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .cards-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, #151515 0%, #0d0d0d 100%);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.28);
+      height: 100%;
+    }
+
+    .card-metal {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-metal::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.05), transparent 35%);
+      pointer-events: none;
+    }
+
+    .card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(225,6,0,0.20), rgba(212,160,23,0.12));
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--gold-bright);
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      line-height: 1.2;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .split-panel {
+      background: linear-gradient(180deg, #151515 0%, #0d0d0d 100%);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 14px 50px rgba(0,0,0,0.30);
+    }
+
+    .panel-label {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .label-homeowners {
+      background: rgba(212,160,23,0.10);
+      color: var(--gold-bright);
+      border: 1px solid rgba(212,160,23,0.24);
+    }
+
+    .label-contractors {
+      background: rgba(225,6,0,0.10);
+      color: #ff8b8b;
+      border: 1px solid rgba(225,6,0,0.22);
+    }
+
+    .split-panel h3 {
+      margin: 0 0 12px;
+      font-size: 30px;
+      line-height: 1.15;
+    }
+
+    .split-panel p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 16px;
+    }
+
+    .feature-list {
+      list-style: none;
+      margin: 0 0 22px;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .feature-list li {
+      position: relative;
+      padding-left: 28px;
+      color: #ebebeb;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    .feature-list li::before {
+      content: "◆";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--gold-bright);
+      font-size: 14px;
+    }
+
+    .vetting {
+      background:
+        linear-gradient(180deg, rgba(179,0,0,0.12), rgba(0,0,0,0)),
+        linear-gradient(180deg, #121212 0%, #090909 100%);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 26px;
+      padding: 30px;
+      box-shadow: 0 18px 60px rgba(0,0,0,0.34);
+    }
+
+    .vetting h2 {
+      margin: 0 0 12px;
+      font-size: 34px;
+    }
+
+    .vetting p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 16px;
+    }
+
+    .vetting-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 14px;
+    }
+
+    .vetting-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .vetting-item strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #ffffff;
+      font-size: 17px;
+    }
+
+    .vetting-item span {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+      display: block;
+    }
+
+    .cta-band {
+      background:
+        linear-gradient(135deg, rgba(179,0,0,0.22), rgba(212,160,23,0.12)),
+        linear-gradient(180deg, #161616 0%, #0b0b0b 100%);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 26px;
+      padding: 34px 28px;
+      box-shadow: 0 18px 60px rgba(0,0,0,0.35);
+      text-align: center;
+    }
+
+    .cta-band h2 {
+      margin: 0 0 10px;
+      font-size: 36px;
+      line-height: 1.1;
+    }
+
+    .cta-band p {
+      margin: 0 auto 24px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.7;
+      max-width: 840px;
+    }
+
+    .cta-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    footer {
+      padding: 26px 0 40px;
+      color: #9c9c9c;
+    }
+
+    .footer-inner {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .footer-brand {
+      font-weight: 900;
+      letter-spacing: 1px;
+      color: #e5e5e5;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .cards-3,
+      .cards-2,
+      .split,
+      .vetting-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 46px;
+      }
+
+      .hero-card-logo {
+        max-width: 360px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px 0;
+      }
+
+      .nav {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .brand {
+        align-items: center;
+      }
+
+      .brand-logo {
+        width: 76px;
+        max-height: 76px;
+      }
+
+      .brand-title {
+        font-size: 28px;
+      }
+
+      .brand-tagline {
+        font-size: 13px;
+      }
+
+      .hero {
+        padding-top: 42px;
+      }
+
+      .hero h1 {
+        font-size: 38px;
+      }
+
+      .hero .subheadline {
+        font-size: 19px;
+      }
+
+      .section-heading h2,
+      .split-panel h3,
+      .vetting h2,
+      .cta-band h2 {
+        font-size: 30px;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero-actions,
+      .cta-actions {
+        flex-direction: column;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="/" class="brand">
+        <img src="/static/vaultforge-logo.png" alt="VaultForge Logo" class="brand-logo" />
+        <div class="brand-copy">
+          <h1 class="brand-title">VaultForge</h1>
+          <p class="brand-tagline">Homeowners Choose. Contractors Unlock Opportunity.</p>
+        </div>
+      </a>
+
+      <nav class="nav">
+        <a class="nav-link" href="/services">Find a Contractor</a>
+        <a class="nav-link" href="/join-contractor">Join as a Contractor</a>
+        <a class="nav-link" href="/admin">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Exclusive Homeowner Requests • Premium Contractor Access</span>
+          <h1>Built for serious homeowners and contractors who are ready to move.</h1>
+          <p class="subheadline">
+            <strong>Homeowners Choose. Contractors Unlock Opportunity.</strong>
+          </p>
+          <p class="support">
+            VaultForge connects homeowners with vetted contractors through a cleaner, more controlled system.
+            Homeowners choose the contractor they want. Contractors get access to real opportunities without getting buried in a bidding war.
+          </p>
+
+          <div class="hero-actions">
+            <a href="/services" class="btn btn-primary">Find a Contractor</a>
+            <a href="/join-contractor" class="btn btn-gold">Join VaultForge</a>
+            <a href="/admin" class="btn btn-secondary">Admin</a>
+          </div>
+
+          <div class="hero-points">
+            <div class="hero-point">Exclusive homeowner requests</div>
+            <div class="hero-point">Vetted contractor network</div>
+            <div class="hero-point">No crowded lead race</div>
+            <div class="hero-point">Built for real opportunity</div>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-card-frame">
+            <img src="/static/vaultforge-logo.png" alt="VaultForge" class="hero-card-logo" />
+          </div>
+          <div class="hero-card-caption">
+            A stronger way to connect homeowner demand with contractor opportunity.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-heading">
+          <h2>How VaultForge Works</h2>
+          <p>
+            The platform is designed to stay straightforward for homeowners and more valuable for contractors.
+            Clear process. Better fit. Stronger quality control.
+          </p>
+        </div>
+
+        <div class="cards-3">
+          <div class="card card-metal">
+            <div class="card-icon">1</div>
+            <h3>Homeowners choose a service</h3>
+            <p>
+              Start by selecting the type of work you need and browse contractors approved for that service.
+            </p>
+          </div>
+
+          <div class="card card-metal">
+            <div class="card-icon">2</div>
+            <h3>Pick the contractor you want</h3>
+            <p>
+              Instead of blasting your request everywhere, you choose the contractor you want to hear from.
+            </p>
+          </div>
+
+          <div class="card card-metal">
+            <div class="card-icon">3</div>
+            <h3>Contractors unlock the opportunity</h3>
+            <p>
+              Contractors receive exclusive homeowner requests and can unlock access when they want the opportunity.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container split">
+        <div class="split-panel">
+          <span class="panel-label label-homeowners">For Homeowners</span>
+          <h3>Find a contractor with more confidence.</h3>
+          <p>
+            VaultForge is built for homeowners who want a cleaner path to the right pro.
+            You choose the contractor. You submit the request. The process stays focused and direct.
+          </p>
+          <ul class="feature-list">
+            <li>Browse contractors by service category</li>
+            <li>Choose the contractor you actually want</li>
+            <li>Avoid the chaos of broad, shared lead systems</li>
+            <li>Submit your project through a cleaner request flow</li>
+          </ul>
+          <a href="/services" class="btn btn-primary">Start Here</a>
+        </div>
+
+        <div class="split-panel">
+          <span class="panel-label label-contractors">For Contractors</span>
+          <h3>Unlock real homeowner opportunities.</h3>
+          <p>
+            Contractors on VaultForge are positioned for exclusive opportunity, not a race to the bottom.
+            The model is built to respect your time while keeping access simple and transparent.
+          </p>
+          <ul class="feature-list">
+            <li>Receive homeowner requests tied directly to your service</li>
+            <li>No crowded bidding war around the same request</li>
+            <li>Unlock opportunities when you decide to pursue them</li>
+            <li>Built for serious contractors who are ready to work</li>
+          </ul>
+          <a href="/join-contractor" class="btn btn-gold">Join as a Contractor</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="vetting">
+          <h2>Our contractor review process is part of the brand.</h2>
+          <p>
+            We want homeowners to feel confident using VaultForge, and we want legitimate contractors to understand exactly why the review process exists.
+            The goal is not to create friction. The goal is to protect quality, trust, and real opportunity on both sides of the platform.
+          </p>
+
+          <div class="vetting-grid">
+            <div class="vetting-item">
+              <strong>Registered</strong>
+              <span>
+                Contractors should be operating as real businesses and presenting themselves professionally.
+              </span>
+            </div>
+
+            <div class="vetting-item">
+              <strong>Licensed</strong>
+              <span>
+                Where licensing applies, contractors should be able to represent their trade credibly and legitimately.
+              </span>
+            </div>
+
+            <div class="vetting-item">
+              <strong>Insured</strong>
+              <span>
+                We want homeowners to feel safer and contractors to stand apart through a more trustworthy profile.
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cards-2">
+          <div class="card">
+            <div class="card-icon">◆</div>
+            <h3>For homeowners</h3>
+            <p>
+              You should not have to guess who is real, who is responsive, or who actually does the work you need.
+              VaultForge is built to help you start with more clarity.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">◆</div>
+            <h3>For contractors</h3>
+            <p>
+              If you are legitimate, qualified, and ready to work, the review process is there to strengthen the network you are joining — not weaken your access.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta-band">
+          <h2>Choose your side of the platform.</h2>
+          <p>
+            Homeowners can start by selecting a service and choosing a contractor.
+            Contractors can apply to join the network and position themselves for exclusive homeowner opportunities.
+          </p>
+          <div class="cta-actions">
+            <a href="/services" class="btn btn-primary">I Need a Contractor</a>
+            <a href="/join-contractor" class="btn btn-gold">I’m a Contractor</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-brand">VaultForge</div>
+      <div>Homeowners Choose. Contractors Unlock Opportunity.</div>
+    </div>
+  </footer>
+</body>
+</html>
