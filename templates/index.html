@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeadForge | Exclusive Contractor Requests</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #0b0b0b;
+      --bg-soft: #121212;
+      --panel: #161616;
+      --panel-2: #1d1d1d;
+      --text: #f5f5f5;
+      --muted: #b5b5b5;
+      --red: #cc0000;
+      --red-dark: #990000;
+      --gold: #d4af37;
+      --gold-dark: #b8860b;
+      --border: rgba(255, 255, 255, 0.08);
+      --shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+      --radius: 18px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(212, 175, 55, 0.08), transparent 25%),
+        radial-gradient(circle at top right, rgba(204, 0, 0, 0.10), transparent 30%),
+        linear-gradient(180deg, #111111 0%, #0b0b0b 38%, #090909 100%);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(12, 12, 12, 0.94);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding: 12px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: #ffffff;
+      letter-spacing: 0.2px;
+    }
+
+    .brand img {
+      height: 52px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      color: #ededed;
+      font-size: 0.96rem;
+      padding: 10px 14px;
+      border-radius: 10px;
+      transition: 0.2s ease;
+    }
+
+    .nav-link:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 22px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-align: center;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.18s ease, opacity 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      opacity: 0.98;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: #111111;
+      box-shadow: 0 12px 28px rgba(212, 175, 55, 0.22);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .btn-danger {
+      background: linear-gradient(135deg, var(--red), var(--red-dark));
+      color: #ffffff;
+      box-shadow: 0 12px 28px rgba(204, 0, 0, 0.22);
+    }
+
+    .hero {
+      padding: 84px 0 72px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(212, 175, 55, 0.10);
+      border: 1px solid rgba(212, 175, 55, 0.20);
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.2px;
+    }
+
+    .hero h1 {
+      margin: 0 0 18px;
+      font-size: 3.35rem;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      max-width: 760px;
+    }
+
+    .hero p {
+      margin: 0 0 26px;
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 700px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 30px;
+    }
+
+    .hero-points {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .point {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .point strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #ffffff;
+      font-size: 1rem;
+    }
+
+    .point span {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .hero-card {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015)),
+        linear-gradient(135deg, rgba(204,0,0,0.12), rgba(212,175,55,0.08));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card h3 {
+      margin: 0 0 16px;
+      font-size: 1.45rem;
+      color: #ffffff;
+    }
+
+    .hero-card p {
+      margin: 0 0 22px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .mini-item {
+      background: rgba(0, 0, 0, 0.20);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
+      padding: 14px 15px;
+    }
+
+    .mini-item strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #ffffff;
+      font-size: 0.98rem;
+    }
+
+    .mini-item span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    section {
+      padding: 76px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 42px;
+    }
+
+    .section-title h2 {
+      margin: 0 0 12px;
+      font-size: 2.35rem;
+      color: #ffffff;
+    }
+
+    .section-title p {
+      margin: 0 auto;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.03rem;
+    }
+
+    .service-highlight {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .service-box {
+      background:
+        linear-gradient(180deg, var(--panel), var(--panel-2));
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .service-box h3 {
+      margin: 0 0 12px;
+      color: #ffffff;
+      font-size: 1.5rem;
+    }
+
+    .service-box p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 36px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #f2f2f2;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .step-card {
+      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .step-number {
+      width: 42px;
+      height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--red), var(--red-dark));
+      color: #ffffff;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .step-card h3 {
+      margin: 0 0 10px;
+      color: #ffffff;
+      font-size: 1.2rem;
+    }
+
+    .step-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+
+    .cta-band {
+      padding-top: 10px;
+    }
+
+    .cta-box {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015)),
+        linear-gradient(135deg, rgba(204,0,0,0.12), rgba(212,175,55,0.08));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 34px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: center;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-box h3 {
+      margin: 0 0 10px;
+      font-size: 1.8rem;
+      color: #ffffff;
+    }
+
+    .cta-box p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 700px;
+    }
+
+    footer {
+      margin-top: 26px;
+      border-top: 1px solid var(--border);
+      background: #0d0d0d;
+      padding: 24px 0;
+      color: #9d9d9d;
+      font-size: 0.93rem;
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .steps,
+      .cta-box,
+      .hero-points,
+      .service-highlight {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 72px 0 58px;
+      }
+
+      .hero h1 {
+        font-size: 2.65rem;
+      }
+
+      .cta-box {
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 0 16px;
+      }
+
+      .nav {
+        min-height: auto;
+        padding: 14px 0;
+      }
+
+      .brand {
+        font-size: 1.1rem;
+      }
+
+      .brand img {
+        height: 46px;
+      }
+
+      .nav-links {
+        width: 100%;
+      }
+
+      .nav-link {
+        padding: 10px 12px;
+      }
+
+      .hero {
+        padding: 56px 0 46px;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero p,
+      .section-title p,
+      .cta-box p {
+        font-size: 0.98rem;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .section-title h2 {
+        font-size: 1.9rem;
+      }
+
+      .cta-box {
+        padding: 24px;
+      }
+
+      .step-card,
+      .hero-card,
+      .point,
+      .service-box {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav">
+      <a href="/" class="brand">
+        <img src="/static/IMG_2026.png" alt="LeadForge Logo" />
+        <span>LeadForge</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/services" class="nav-link">Find a Contractor</a>
+        <a href="/join-contractor" class="nav-link">Join as Contractor</a>
+        <a href="/admin" class="nav-link">Admin</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">Exclusive homeowner requests</div>
+
+        <h1>Connect homeowners with the right contractor, one exclusive request at a time.</h1>
+
+        <p>
+          LeadForge helps homeowners browse contractors by service, choose the one they want,
+          and send a direct request. Contractors get a cleaner opportunity flow without competing
+          against a pile of shared leads.
+        </p>
+
+        <div class="hero-actions">
+          <a href="/services" class="btn btn-primary">Find a Contractor</a>
+          <a href="/join-contractor" class="btn btn-secondary">Join as a Contractor</a>
+          <a href="/admin" class="btn btn-danger">Admin Panel</a>
+        </div>
+
+        <div class="hero-points">
+          <div class="point">
+            <strong>For Homeowners</strong>
+            <span>Pick the contractor you want and send one direct request.</span>
+          </div>
+          <div class="point">
+            <strong>For Contractors</strong>
+            <span>Join free and unlock exclusive homeowner opportunities.</span>
+          </div>
+          <div class="point">
+            <strong>Simple Flow</strong>
+            <span>Browse, choose, request, approve, unlock, and connect.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <h3>Why LeadForge</h3>
+        <p>
+          Homeowners can search for the service they need and connect directly with one contractor.
+          Contractors in the right fields can join the network and receive exclusive homeowner opportunities.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-item">
+            <strong>Homeowner side</strong>
+            <span>Looking for roofing, HVAC, plumbing, electrical, remodeling, fencing, cleaning, and more.</span>
+          </div>
+          <div class="mini-item">
+            <strong>Contractor side</strong>
+            <span>We are building our network with contractors in those same service categories.</span>
+          </div>
+          <div class="mini-item">
+            <strong>Direct connection</strong>
+            <span>One homeowner chooses one contractor instead of blasting the same job everywhere.</span>
+          </div>
+        </div>
+
+        <a href="/services" class="btn btn-primary" style="width: 100%;">Begin Homeowner Flow</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-title">
+        <h2>Homeowners are looking for these services</h2>
+        <p>
+          LeadForge is built for homeowners who want to quickly find the right contractor by category
+          and send one direct request.
+        </p>
+      </div>
+
+      <div class="service-highlight">
+        <div class="service-box">
+          <h3>Popular homeowner request categories</h3>
+          <p>
+            Homeowners are searching for trusted contractors in these fields right now.
+          </p>
+          <div class="service-tags">
+            <span class="tag">Roofing</span>
+            <span class="tag">HVAC</span>
+            <span class="tag">Plumbing</span>
+            <span class="tag">Electrical</span>
+            <span class="tag">Remodeling</span>
+            <span class="tag">Fencing</span>
+            <span class="tag">Exterior Cleaning</span>
+            <span class="tag">Landscaping</span>
+            <span class="tag">Handyman</span>
+            <span class="tag">Junk Removal</span>
+            <span class="tag">Pest Control</span>
+            <span class="tag">Cleaning</span>
+          </div>
+        </div>
+
+        <div class="service-box">
+          <h3>We are looking for contractors in these fields</h3>
+          <p>
+            If you serve homeowners in one or more of these categories, LeadForge is looking to add you to the network.
+          </p>
+          <div class="service-tags">
+            <span class="tag">Roofing Contractors</span>
+            <span class="tag">HVAC Contractors</span>
+            <span class="tag">Plumbers</span>
+            <span class="tag">Electricians</span>
+            <span class="tag">Remodelers</span>
+            <span class="tag">Fence Installers</span>
+            <span class="tag">Soft Washing Pros</span>
+            <span class="tag">Landscapers</span>
+            <span class="tag">Handymen</span>
+            <span class="tag">Junk Removal Pros</span>
+            <span class="tag">Pest Control Pros</span>
+            <span class="tag">Cleaning Pros</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-title">
+        <h2>How LeadForge works</h2>
+        <p>
+          The site is built around a simple exclusive request model that keeps the process cleaner
+          for both homeowners and contractors.
+        </p>
+      </div>
+
+      <div class="steps">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Homeowner chooses a service</h3>
+          <p>
+            The homeowner starts by selecting the service they need and viewing matching contractors.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>One direct request is sent</h3>
+          <p>
+            The homeowner picks one contractor and submits one exclusive request for that project.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Contractor unlocks the opportunity</h3>
+          <p>
+            The contractor sees the request, unlocks it, and gets the homeowner’s full contact details.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="container">
+      <div class="cta-box">
+        <div>
+          <h3>Ready to get started?</h3>
+          <p>
+            Homeowners can browse by service and choose a contractor. Contractors can join the network
+            and start receiving exclusive homeowner opportunities in their field.
+          </p>
+        </div>
+
+        <a href="/services" class="btn btn-primary">Find a Contractor</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      LeadForge connects homeowners with contractors through exclusive direct requests.
+    </div>
+  </footer>
+
+</body>
+</html>
