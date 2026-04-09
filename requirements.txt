@@ -5,4 +5,5 @@ python-multipart
 supabase
 stripe
 httpx
+itsdangerous
 
