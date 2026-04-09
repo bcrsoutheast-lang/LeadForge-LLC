@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeadForge Admin</title>
+  <style>
+    :root {
+      --bg: #070707;
+      --panel: #141414;
+      --panel-2: #1b1b1b;
+      --text: #f4f4f4;
+      --muted: #b7b7b7;
+      --red: #c8102e;
+      --red-dark: #8f0d22;
+      --gold: #d4af37;
+      --gold-soft: rgba(212, 175, 55, 0.14);
+      --border: rgba(255,255,255,0.08);
+      --shadow: 0 18px 45px rgba(0,0,0,0.35);
+      --success: #18a957;
+      --danger: #d63b3b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(circle at top, rgba(200,16,46,0.16), transparent 28%),
+        linear-gradient(180deg, #050505 0%, #090909 100%);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 22px 14px 40px;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand img {
+      width: 54px;
+      height: 54px;
+      object-fit: contain;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.03);
+      padding: 4px;
+    }
+
+    .brand-copy h1 {
+      margin: 0;
+      font-size: 1.22rem;
+      color: #fff;
+    }
+
+    .brand-copy p {
+      margin: 4px 0 0;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+
+    .hero {
+      background:
+        linear-gradient(135deg, rgba(200,16,46,0.18), rgba(212,175,55,0.10)),
+        var(--panel);
+      border: 1px solid rgba(212,175,55,0.16);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 24px 20px;
+      margin-bottom: 18px;
+    }
+
+    .hero h2 {
+      margin: 0 0 10px;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+    }
+
+    .hero p {
+      margin: 0;
+      color: #d9d9d9;
+      line-height: 1.65;
+      font-size: 1rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .stat {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .stat-label {
+      color: var(--gold);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .stat-value {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .section-head {
+      padding: 18px 20px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: linear-gradient(180deg, rgba(200,16,46,0.14), rgba(0,0,0,0));
+    }
+
+    .section-head h3 {
+      margin: 0 0 6px;
+      font-size: 1.28rem;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .section-body {
+      padding: 18px;
+    }
+
+    .empty {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .pending-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .pending-card,
+    .contractor-card,
+    .lead-card {
+      background: var(--panel-2);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 20px;
+      padding: 18px;
+    }
+
+    .pending-card h4,
+    .contractor-card h4,
+    .lead-card h5 {
+      margin: 0 0 12px;
+      font-size: 1.18rem;
+      color: #fff;
+    }
+
+    .meta {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .meta div {
+      color: #eaeaea;
+      line-height: 1.5;
+      font-size: 0.97rem;
+    }
+
+    .meta strong {
+      color: #fff;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .actions form {
+      margin: 0;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    .btn-approve {
+      background: linear-gradient(180deg, var(--success), #118246);
+    }
+
+    .btn-reject {
+      background: linear-gradient(180deg, var(--danger), #a82727);
+    }
+
+    .contractor-stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .contractor-card {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .contractor-top {
+      padding: 20px;
+      background:
+        linear-gradient(135deg, rgba(200,16,46,0.18), rgba(212,175,55,0.08)),
+        var(--panel-2);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .contractor-name {
+      margin: 0 0 8px;
+      font-size: 1.35rem;
+      color: #fff;
+    }
+
+    .contractor-sub {
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .contractor-body {
+      padding: 18px;
+    }
+
+    .contractor-meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .meta-box {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 14px;
+    }
+
+    .meta-box span {
+      display: block;
+      color: var(--gold);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .meta-box div {
+      color: #ededed;
+      font-size: 0.96rem;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+
+    .contractor-id {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      word-break: break-all;
+    }
+
+    .lead-group-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 14px;
+      flex-wrap: wrap;
+    }
+
+    .lead-group-title h5 {
+      margin: 0;
+      font-size: 1.08rem;
+      color: #fff;
+    }
+
+    .lead-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 30px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--gold-soft);
+      color: #f6df8e;
+      border: 1px solid rgba(212,175,55,0.24);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .lead-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .lead-card {
+      background: #151515;
+    }
+
+    .lead-meta {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .lead-meta div {
+      color: #ededed;
+      line-height: 1.5;
+      font-size: 0.96rem;
+    }
+
+    .lead-meta strong {
+      color: #fff;
+    }
+
+    .pill-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 28px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .pill-service {
+      background: rgba(212,175,55,0.15);
+      color: #f6df8e;
+      border: 1px solid rgba(212,175,55,0.24);
+    }
+
+    .pill-locked {
+      background: rgba(214,59,59,0.14);
+      color: #ffabab;
+      border: 1px solid rgba(214,59,59,0.24);
+    }
+
+    .pill-unlocked {
+      background: rgba(24,169,87,0.14);
+      color: #9cf0c3;
+      border: 1px solid rgba(24,169,87,0.24);
+    }
+
+    .copy-label {
+      display: block;
+      color: var(--gold);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    textarea.copy-box {
+      width: 100%;
+      min-height: 150px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      background: #101010;
+      color: #f4f4f4;
+      padding: 14px;
+      font-size: 0.95rem;
+      line-height: 1.55;
+      resize: vertical;
+      outline: none;
+    }
+
+    @media (max-width: 980px) {
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .contractor-meta {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .topbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .back-link {
+        width: 100%;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head,
+      .section-body,
+      .contractor-top,
+      .contractor-body {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="wrap">
+      <div class="topbar">
+        <div class="brand">
+          <img src="/static/IMG_2026.png" alt="LeadForge logo">
+          <div class="brand-copy">
+            <h1>LeadForge Admin</h1>
+            <p>See contractors and their matching homeowner requests in one place.</p>
+          </div>
+        </div>
+        <a class="back-link" href="/">← Back Home</a>
+      </div>
+
+      <section class="hero">
+        <h2>Admin Dashboard</h2>
+        <p>
+          Contractors are grouped with their matching homeowner requests below so you can quickly
+          review who each request belongs to and copy the info into a text message with your payment link.
+        </p>
+      </section>
+
+      <section class="stats">
+        <div class="stat">
+          <span class="stat-label">Pending Contractors</span>
+          <div class="stat-value">{{ pending_contractors|length }}</div>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Approved Contractors</span>
+          <div class="stat-value">{{ approved_contractors|length }}</div>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Total Leads</span>
+          <div class="stat-value">{{ leads|length }}</div>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Unlocked Leads</span>
+          <div class="stat-value">{{ leads|selectattr('unlocked')|list|length }}</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h3>Pending Contractors</h3>
+          <p>Approve or reject new contractor applications here.</p>
+        </div>
+        <div class="section-body">
+          {% if pending_contractors and pending_contractors|length > 0 %}
+            <div class="pending-grid">
+              {% for contractor in pending_contractors %}
+                <div class="pending-card">
+                  <h4>{{ contractor.company_name if contractor.company_name else (contractor.contact_name if contractor.contact_name else "Pending Contractor") }}</h4>
+
+                  <div class="meta">
+                    <div><strong>Name:</strong> {{ contractor.contact_name if contractor.contact_name else "Not listed" }}</div>
+                    <div><strong>Service:</strong> {{ contractor.service if contractor.service else "Not listed" }}</div>
+                    <div><strong>City:</strong> {{ contractor.city if contractor.city else "Not listed" }}, {{ contractor.state if contractor.state else "Not listed" }}</div>
+                    <div><strong>ZIP:</strong> {{ contractor.zip_code if contractor.zip_code else "Not listed" }}</div>
+                    <div><strong>Phone:</strong> {{ contractor.phone if contractor.phone else "Not listed" }}</div>
+                    <div><strong>Email:</strong> {{ contractor.email if contractor.email else "Not listed" }}</div>
+                    <div><strong>Bio:</strong> {{ contractor.bio if contractor.bio else "Not listed" }}</div>
+                  </div>
+
+                  <div class="actions">
+                    <form method="post" action="/approve/{{ contractor.id }}">
+                      <button type="submit" class="btn btn-approve">Approve</button>
+                    </form>
+
+                    <form method="post" action="/reject/{{ contractor.id }}">
+                      <button type="submit" class="btn btn-reject">Reject</button>
+                    </form>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          {% else %}
+            <div class="empty">No pending contractors found.</div>
+          {% endif %}
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h3>Approved Contractors + Matching Leads</h3>
+          <p>Each contractor now shows their own homeowner requests directly underneath.</p>
+        </div>
+        <div class="section-body">
+          {% if approved_contractors and approved_contractors|length > 0 %}
+            <div class="contractor-stack">
+              {% for contractor in approved_contractors %}
+                {% set contractor_leads = leads | selectattr("contractor_id", "equalto", contractor.id) | list %}
+
+                <div class="contractor-card">
+                  <div class="contractor-top">
+                    <h4 class="contractor-name">
+                      {{ contractor.company_name if contractor.company_name else (contractor.contact_name if contractor.contact_name else "Approved Contractor") }}
+                    </h4>
+                    <p class="contractor-sub">
+                      {{ contractor.contact_name if contractor.contact_name else "No contact name" }}
+                    </p>
+                  </div>
+
+                  <div class="contractor-body">
+                    <p class="contractor-id"><strong>Contractor ID:</strong> {{ contractor.id }}</p>
+
+                    <div class="contractor-meta">
+                      <div class="meta-box">
+                        <span>Service</span>
+                        <div>{{ contractor.service if contractor.service else "Not listed" }}</div>
+                      </div>
+                      <div class="meta-box">
+                        <span>Location</span>
+                        <div>
+                          {{ contractor.city if contractor.city else "Not listed" }}{% if contractor.city and contractor.state %}, {% endif %}{{ contractor.state if contractor.state else "" }}
+                        </div>
+                      </div>
+                      <div class="meta-box">
+                        <span>ZIP</span>
+                        <div>{{ contractor.zip_code if contractor.zip_code else "Not listed" }}</div>
+                      </div>
+                      <div class="meta-box">
+                        <span>Phone</span>
+                        <div>{{ contractor.phone if contractor.phone else "Not listed" }}</div>
+                      </div>
+                      <div class="meta-box">
+                        <span>Email</span>
+                        <div>{{ contractor.email if contractor.email else "Not listed" }}</div>
+                      </div>
+                      <div class="meta-box">
+                        <span>Bio</span>
+                        <div>{{ contractor.bio if contractor.bio else "Not listed" }}</div>
+                      </div>
+                    </div>
+
+                    <div class="lead-group-title">
+                      <h5>Matching Leads</h5>
+                      <span class="lead-count">{{ contractor_leads|length }} lead{% if contractor_leads|length != 1 %}s{% endif %}</span>
+                    </div>
+
+                    {% if contractor_leads and contractor_leads|length > 0 %}
+                      <div class="lead-grid">
+                        {% for lead in contractor_leads %}
+                          <div class="lead-card">
+                            <div class="pill-row">
+                              <span class="pill pill-service">{{ lead.service if lead.service else "Service not listed" }}</span>
+                              {% if lead.unlocked %}
+                                <span class="pill pill-unlocked">Unlocked</span>
+                              {% else %}
+                                <span class="pill pill-locked">Locked</span>
+                              {% endif %}
+                            </div>
+
+                            <h5>{{ lead.homeowner_name if lead.homeowner_name else "Unnamed Homeowner" }}</h5>
+
+                            <div class="lead-meta">
+                              <div><strong>Phone:</strong> {{ lead.phone if lead.phone else "Not listed" }}</div>
+                              <div><strong>Email:</strong> {{ lead.email if lead.email else "Not listed" }}</div>
+                              <div><strong>City:</strong> {{ lead.city if lead.city else "Not listed" }}, {{ lead.state if lead.state else "Not listed" }}</div>
+                              <div><strong>ZIP:</strong> {{ lead.zip_code if lead.zip_code else "Not listed" }}</div>
+                              <div><strong>Project:</strong> {{ lead.project_details if lead.project_details else "Not listed" }}</div>
+                              <div><strong>Stripe Paid:</strong> {% if lead.stripe_paid %}Yes{% else %}No{% endif %}</div>
+                              <div><strong>Stripe Session:</strong> {{ lead.stripe_session_id if lead.stripe_session_id else "Not created yet" }}</div>
+                            </div>
+
+                            <label class="copy-label">Copy message for contractor</label>
+                            <textarea class="copy-box">New LeadForge opportunity for {{ contractor.company_name if contractor.company_name else (contractor.contact_name if contractor.contact_name else "your business") }}
+
+Homeowner: {{ lead.homeowner_name if lead.homeowner_name else "Not listed" }}
+Service: {{ lead.service if lead.service else "Not listed" }}
+Phone: {{ lead.phone if lead.phone else "Not listed" }}
+Email: {{ lead.email if lead.email else "Not listed" }}
+City/State: {{ lead.city if lead.city else "Not listed" }}, {{ lead.state if lead.state else "Not listed" }}
+ZIP: {{ lead.zip_code if lead.zip_code else "Not listed" }}
+Project: {{ lead.project_details if lead.project_details else "Not listed" }}
+
+{% if lead.stripe_session_id %}
+Unlock / payment session: {{ lead.stripe_session_id }}
+{% else %}
+Add your Stripe payment link here before sending.
+{% endif %}</textarea>
+                          </div>
+                        {% endfor %}
+                      </div>
+                    {% else %}
+                      <div class="empty">No leads for this contractor yet.</div>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          {% else %}
+            <div class="empty">No approved contractors found.</div>
+          {% endif %}
+        </div>
+      </section>
+    </div>
+  </div>
+</body>
+</html>
