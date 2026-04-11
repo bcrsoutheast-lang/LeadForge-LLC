@@ -1300,10 +1300,7 @@ service = ", ".join(selected_services)
             "Please complete all required fields before submitting.",
         )
 
-    if not selected_service_list:
-        return error_page(
-            "Contractor Application Error",
-            "Please choose at least one service before submitting your application.",
+    
         )
 
     contractor_id = str(uuid4())
