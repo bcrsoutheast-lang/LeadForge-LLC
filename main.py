@@ -1147,6 +1147,77 @@ def join_contractor_form():
 
     <div class="card">
       <form method="post" action="/join-contractor">
+
+        <label>Full Name</label>
+        <input name="full_name" required>
+
+        <label>Company Name</label>
+        <input name="company_name" required>
+
+        <label>Phone</label>
+        <input name="phone" required>
+
+        <label>Email</label>
+        <input type="email" name="email" required>
+
+        <label>Select Services</label>
+        <div class="grid grid-2">
+          <label><input type="checkbox" name="services" value="roofing"> Roofing</label>
+          <label><input type="checkbox" name="services" value="siding"> Siding</label>
+          <label><input type="checkbox" name="services" value="gutters"> Gutters</label>
+          <label><input type="checkbox" name="services" value="painting"> Painting</label>
+          <label><input type="checkbox" name="services" value="flooring"> Flooring</label>
+          <label><input type="checkbox" name="services" value="plumbing"> Plumbing</label>
+          <label><input type="checkbox" name="services" value="electrical"> Electrical</label>
+          <label><input type="checkbox" name="services" value="hvac"> HVAC</label>
+          <label><input type="checkbox" name="services" value="landscaping"> Landscaping</label>
+          <label><input type="checkbox" name="services" value="remodeling"> Remodeling</label>
+          <label><input type="checkbox" name="services" value="fencing"> Fencing</label>
+          <label><input type="checkbox" name="services" value="decking"> Decking</label>
+          <label><input type="checkbox" name="services" value="tree cutting"> Tree Cutting</label>
+          <label><input type="checkbox" name="services" value="land clearing"> Land Clearing</label>
+          <label><input type="checkbox" name="services" value="grading"> Grading</label>
+          <label><input type="checkbox" name="services" value="septic tank"> Septic Tank</label>
+        </div>
+
+        <label>City</label>
+        <input name="city" required>
+
+        <label>State</label>
+        <input name="state" required>
+
+        <label>ZIP Code</label>
+        <input name="zip" required>
+
+        <label>Business Description</label>
+        <textarea name="business_description" rows="5"></textarea>
+
+        <div style="margin-top:20px; padding:15px; border:1px solid #444; border-radius:10px;">
+          <label style="font-weight:bold;">
+            <input type="checkbox" name="disclaimer" required>
+            Before submitting, I confirm that I am <strong>LICENSED where applicable</strong> for my trade and <strong style="color:#d4af37;">FULLY INSURED</strong>.
+          </label>
+        </div>
+
+        <button class="btn gold" type="submit">Submit Contractor Application</button>
+      </form>
+    </div>
+    """
+    return layout("Join Contractor", body)
+
+    body = f"""
+    {topbar()}
+    <div class="hero">
+      <h1>Apply to Join VaultForge</h1>
+      <p class="muted">Join free and get access to exclusive homeowner opportunities.</p>
+      <p class="mini">
+        Contractors that present themselves professionally, operate legitimately, and meet approval
+        standards have a better shot at being accepted into the directory.
+      </p>
+    </div>
+
+    <div class="card">
+      <form method="post" action="/join-contractor">
         <label>Full Name</label>
         <input name="full_name" required>
 
