@@ -1282,8 +1282,17 @@ async def join_contractor_submit(request: Request):
     state = str(form.get("state") or "").strip()
     zip = str(form.get("zip") or "").strip()
     business_description = str(form.get("business_description") or "").strip()
-    selected_service_list = [str(s).strip().lower() for selected_services = form.getlist("services")
-selected_services = [s.strip() for s in selected_services if str(s).strip()]
+    selected_service_list = selected_services = form.getlist("services")
+selected_services = [s.strip().lower() for s in selected_services if str(s).strip()]
+
+if not selected_services:
+    return error_page(
+        "Contractor Application Error",
+        "Please select at least one trade before submitting."
+    )
+
+service = ", ".join(selected_services)
+
 
 if not selected_services:
     return error_page(
