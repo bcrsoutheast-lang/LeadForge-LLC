@@ -1282,7 +1282,8 @@ async def join_contractor_submit(request: Request):
     state = str(form.get("state") or "").strip()
     zip = str(form.get("zip") or "").strip()
     business_description = str(form.get("business_description") or "").strip()
-    selected_service_list = selected_services = form.getlist("services")
+
+selected_services = form.getlist("services")
 selected_services = [s.strip().lower() for s in selected_services if str(s).strip()]
 
 if not selected_services:
