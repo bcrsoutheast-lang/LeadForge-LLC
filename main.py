@@ -1294,11 +1294,8 @@ if not selected_services:
 
 service = ", ".join(selected_services)
 
-
-    selected_services = ", ".join(selected_service_list)
-
     if not full_name or not company_name or not phone or not email or not city or not state or not zip:
-        return error_page(
+        
             "Contractor Application Error",
             "Please complete all required fields before submitting.",
         )
